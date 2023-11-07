@@ -2,14 +2,13 @@ const mongoose = require("mongoose")
 
 const appointmentSchema= mongoose.Schema({
 
-    patientID:{
-        type:mongoose.Types.ObjectId,
-        ref:"patient"
+    patientName:{
+        type:String,
+        required:true
     },
-
-    dentistID:{
-        type:mongoose.Types.ObjectId,
-        ref:"dentist"
+    dentistName:{
+        type:String,
+        required:true
     },
     appointmentDate:{
         type:String,

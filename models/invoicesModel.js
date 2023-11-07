@@ -1,24 +1,25 @@
 const mongoose= require("mongoose")
 
 const invoiceSchema= mongoose.Schema({
-    patientID:{
-        type:mongoose.Types.ObjectId,
-        ref:"patient"
-    },
-    appointmentID:{
-        type:mongoose.Types.ObjectId,
-        ref:"appointment"
-    },
-    treatmentID:{
-        type:mongoose.Types.ObjectId,
-        ref:"treatment"
-    },
+   patientName:{
+    type:String,
+    required:true
+   },
+
+   treatmentName:{
+     type:String,
+     required:true
+   },
     invoiceDate:{
         type:String,
         required:true
     },
     amount:{
         type:Number,
+        required:true
+    },
+    status:{
+        type:String,
         required:true
     }
 })

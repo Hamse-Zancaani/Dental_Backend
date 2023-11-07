@@ -1,13 +1,17 @@
 const express= require("express")
-const router=express.Router();
-
 const patientControllers= require("../controllers/patientControllers")
 
+const requireAuth = require('../middleware/requireAuth')
+const router=express.Router();
+
+router.route('/').post(patientControllers.savePatient)
+router.route('/').get(patientControllers.patients)
+router.use(requireAuth)
 
 // get all patient lists
-router.route('/').get(patientControllers.patients)
+
 //create a patient
-router.route('/').post(patientControllers.savePatient)
+
 router.route('/:id').get(patientControllers.singlePatient)
 router.route('/:id').put(patientControllers.editPatient)
 router.route('/:id').delete(patientControllers.deletePatient)

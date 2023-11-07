@@ -2,15 +2,12 @@ const mongoose = require("mongoose")
 
 const dentistSchema= mongoose.Schema({
 
-    firstName: {
+    DentistName: {
         type:String,
         required:true
 
     },
-    lastName:{
-        type:String,
-        required:true
-    },
+    
     contactNumber:{
         type:String
         

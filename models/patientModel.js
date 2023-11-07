@@ -2,15 +2,12 @@ const mongoose= require("mongoose")
 
 const patientSchema= mongoose.Schema({
 
-    firstName: {
+    patientName: {
         type:String,
         required:true
 
     },
-    lastName:{
-        type:String,
-        required:true
-    },
+   
     dateOfBirth:{
         type:String,
         required:true

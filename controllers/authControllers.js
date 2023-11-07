@@ -1,24 +1,33 @@
 const User=require("../models/usersModel")
 const bcrypt=require("bcrypt")
+const jwt= require('jsonwebtoken')
 
 // login
 
-
+const createToken = (_id) => {
+  return jwt.sign({_id}, process.env.Jwt_Secret, { expiresIn: '3d' })
+}
 
 exports.login=async(req,res)=>{
 
   try{
     // if the email is right
-const{email}=req.body
+const{email,password}=req.body
     const findUser= await User.findOne({email})
     if(!findUser){
-       res.status(400).json({message:"email is incorrect"})
+       res.status(400).json({message:"email  or password is incorrect"})
     }
      //password is incorrect
 
      const comparedPasswords= await bcrypt.compare(password,findUser.password)
      if(comparedPasswords===false){
-     res.status(404).json({message:"password is incorrect"})}
+     res.status(404).json({message:"email  or password is incorrect"})
+    }
+    const token = createToken(User._id)
+
+    res.status(200).json({email, token})
+
+
 
   }catch(e){
     res.status(404).json({message:"error is occured please try again"})
@@ -40,8 +49,10 @@ const{email}=req.body
     req.body.password= hashedPassword
       //save user model info
       await User.create(req.body)
-  
-     res.status(200).json({message:"you have created successfully"})
+    //  const token = createToken(User._id)
+    const token = createToken(User._id)
+
+    res.status(200).json({email, token})
     }catch{
       res.status(404).json({message:"oops! can't create this user"})
     }

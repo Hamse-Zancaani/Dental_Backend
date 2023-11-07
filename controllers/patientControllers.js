@@ -25,7 +25,7 @@ exports.patients=async(req,res)=>{
  
      try{
        const{id}=req.params
-         const singlePatient= await  Patient.findById(id).populate(" patient")
+         const singlePatient= await  Patient.findById(id)
          res.status(200).json(singlePatient)
  
      
@@ -56,17 +56,15 @@ exports.patients=async(req,res)=>{
  // update dentist
  
  exports.editPatient=async(req,res)=>{
-  try{
  
-     const{id}=req.params
-     const editPatient= await  Patient.findByIdAndUpdate(id)
-    res.status(200).json(editPatient)
- 
-  }catch(e){
- 
-     res.status(200).json({message:"can't edit the  Patient"})
+  try {
+    await Patient.findByIdAndUpdate(req.params.id, req.body);
+    res.status(200).json({ message: "Edited Patient" });
+  } catch (e) {
+    res.status(400).json({ message: "error" });
   }
- }
+};
+ 
  
  
  // delete a dentist

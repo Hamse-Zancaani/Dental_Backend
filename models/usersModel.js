@@ -19,7 +19,7 @@ password:{
     type:String,
     required:[true,'please enter your password']
 },
-phone:{
+contactNumber:{
     type:String,
     required:[true,'please enter your phone number']
 },

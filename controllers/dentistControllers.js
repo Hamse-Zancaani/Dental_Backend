@@ -56,16 +56,14 @@ try{
 // update dentist
 
 exports.editDentist=async(req,res)=>{
- try{
-
-    const{id}=req.params
-    const editDentist= await Dentist.findByIdAndUpdate(id)
-   res.status(200).json(editDentist)
-
- }catch(e){
-
-    res.status(200).json({message:"can't edit the dentist"})
- }
+         // update dentist
+ try {
+    await Dentist.findByIdAndUpdate(req.params.id, req.body);
+    res.status(200).json({ message: "Edited Dentist" });
+  } catch (e) {
+    res.status(400).json({ message: "error" });
+  }
+ 
 }
 
 

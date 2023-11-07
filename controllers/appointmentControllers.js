@@ -1,7 +1,7 @@
 const Appointment= require("../models/appointmentModel")
 
 exports.Appointments=async(req,res)=>{
-    // get all blog
+    // get all appointments
  
     try{
  
@@ -19,12 +19,12 @@ exports.Appointments=async(req,res)=>{
  
  
  exports.singleAppointment=async(req,res)=>{
-     // get single bog
+     // get single appointment
  
      try{
-       const{id}=req.params
-         const singleAppointment= await Appointment.findById(id).populate("appointment")
-         res.status(200).json(singleAppointment)
+
+         const singleAppointment= await Appointment.findById(req.params.id).populate({path:"patientID",select:["firstName"]});
+         res.status(200).json({message:"found",singleAppointment})
  
      
  
@@ -54,15 +54,12 @@ exports.Appointments=async(req,res)=>{
  // update dentist
  
  exports.editAppointment=async(req,res)=>{
-  try{
- 
-     const{id}=req.params
-     const editAppointment= await Appointment.findByIdAndUpdate(id)
-    res.status(200).json(editAppointment)
- 
-  }catch(e){
- 
-     res.status(200).json({message:"can't edit the Appointment"})
+        // update dentist
+  try {
+    await Appointment.findByIdAndUpdate(req.params.id, req.body);
+    res.status(200).json({ message: "Edited Appointment" });
+  } catch (e) {
+    res.status(400).json({ message: "error" });
   }
  }
  
