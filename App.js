@@ -34,5 +34,5 @@ app.use('/invoice',invoiceRoutes)
 
 
 
-app.listen(8000,()=>{
-    console.log ("the port started at 8000")})
+app.listen(process.env.PORT,()=>{
+    console.log (`the port started at ${process.env.PORT}`)})
