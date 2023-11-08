@@ -9,7 +9,7 @@ dotenv.config({path:"./.env"})
 
 
 // setup the database
-
+mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGO_URI).then(()=>{
     console.log("connected to db ")
 }).catch((e)=>{
