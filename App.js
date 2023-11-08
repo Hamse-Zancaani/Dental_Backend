@@ -1,11 +1,23 @@
 const express= require("express");
-
+const mongoose=require("mongoose")
 const app= express();
 const cors=require('cors')
 const dotenv= require("dotenv")
+const PORT=process.env.PORT || 8000
 dotenv.config({path:"./.env"})
 
-require("./server")
+
+
+// setup the database
+
+mongoose.connect(process.env.MONGO_URI).then(()=>{
+    console.log("connected to db ")
+}).catch((e)=>{
+    console.log("not connected to db ")
+})
+
+
+//setup the cors to allow the request from the frontend
 app.use(cors())
 
 const authRoutes=require("./routes/authRoutes")
@@ -34,5 +46,5 @@ app.use('/invoice',invoiceRoutes)
 
 
 
-app.listen(process.env.PORT,()=>{
-    console.log (`the port started at ${process.env.PORT}`)})
+app.listen(PORT,()=>{
+    console.log (`the port started at ${PORT}`)})
